@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import ListGroup from "react-bootstrap/ListGroup";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const LOCATION_IQ_API_KEY = import.meta.env.VITE_LOCATION_IQ_API_KEY;
 console.log(LOCATION_IQ_API_KEY);
@@ -12,6 +14,10 @@ class App extends React.Component {
       cityLon: "",
       cityLat: "",
       cityName: "",
+      cityDescription: "",
+      cityDate: "",
+      cityWeather: "",
+      error: null,
     };
   }
 
@@ -34,6 +40,10 @@ class App extends React.Component {
     this.setState({
       valid_date: result2.data[0].valid_date,
       description: result2.data[0].description,
+      valid_date1: result2.data[1].valid_date,
+      description1: result2.data[1].description,
+      valid_date2: result2.data[2].valid_date,
+      description2: result2.data[2].description,
     });
   };
   handleChange = (event) => {
@@ -48,10 +58,20 @@ class App extends React.Component {
     return (
       <>
         <h3> {this.state.displayName} </h3>
-        <p> Latitude {this.state.cityLat} </p>
-        <p> Longitude {this.state.cityLon} </p>
-        <p> Date {this.state.valid_date}</p>
-        <p>Description{this.state.description}</p>
+        <ListGroup>
+          <ListGroup.Item> Latitude: {this.state.cityLat} </ListGroup.Item>
+          <ListGroup.Item> Longitude: {this.state.cityLon} </ListGroup.Item>
+          <ListGroup.Item> Date: {this.state.valid_date}</ListGroup.Item>
+          <ListGroup.Item>Description: {this.state.description}</ListGroup.Item>
+          <ListGroup.Item> Date: {this.state.valid_date1}</ListGroup.Item>
+          <ListGroup.Item>
+            Description: {this.state.description1}
+          </ListGroup.Item>
+          <ListGroup.Item> Date: {this.state.valid_date2}</ListGroup.Item>
+          <ListGroup.Item>
+            Description: {this.state.description2}
+          </ListGroup.Item>
+        </ListGroup>
         <img
           src={`https://maps.locationiq.com/v3/staticmap?key=${LOCATION_IQ_API_KEY}&center=${this.state.cityLat},${this.state.cityLon}&zoom=18`}
         />
